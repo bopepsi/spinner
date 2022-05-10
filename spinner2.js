@@ -1,11 +1,15 @@
-let spinner = (() => {
-    for (let timer = 100; timer <= 900; timer += 200) {
-        setTimeout(() => {
-            if (timer === 100 || timer === 900) process.stdout.write('\r|   ');
-            if (timer === 300) process.stdout.write('\r/   ');
-            if (timer === 500) process.stdout.write('\r-   ');
-            if (timer === 700) process.stdout.write('\r\\   ');
-        }, timer);
+let arr = ['|', '/', '-', '\\'];
+
+let spinner = ((t) => {
+    let delay = 0;
+    while (t > 0) {
+        for (let char of arr) {
+            delay += 250;
+            setTimeout(() => {
+                process.stdout.write(`\r${char}`);
+            }, delay);
+        };
+        t--;
     }
 })
-spinner();
+spinner(6);
